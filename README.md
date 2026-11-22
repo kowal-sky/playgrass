@@ -28,14 +28,18 @@ Todo el código está en `index.html`. No necesita compilar nada ni instalar dep
 
 ## Actualizar la app
 
-Edita `index.html`, haz push, y para forzar que el celular tome la nueva versión cambia el número en `sw.js` (`const CACHE = 'playgrass-v2'`).
+Edita `index.html`, haz push (`git add . && git commit -m "cambios" && git push`) y espera 1 o 2 minutos. Si cambias archivos y el celular sigue mostrando la versión vieja, sube el número en `sw.js` (`const CACHE = 'playgrass-v3'`) y cierra y vuelve a abrir la app.
 
 ## Probar en el navegador
 
 Abre `index.html` o corre `npx serve .`. En pantallas anchas se ve un marco de teléfono con un panel de herramientas (reloj acelerado, terminar día, monedas). En el celular ese panel está oculto; agrega `?dev` a la dirección para verlo. Fuera de ese modo el reloj corre en tiempo real.
 
+## Notificaciones
+
+En la PWA solo funciona el aviso "Se acabó el tiempo" (con vibración y botones +15 min y Apagar), y únicamente mientras la app siga abierta o en segundo plano. La motivación de la mañana y el resumen del fin de semana necesitan la versión APK (carpeta `playgrass-repo`), porque los navegadores no permiten programar notificaciones con la app cerrada. Se activan en Perfil > Notificaciones.
+
 ## Limitaciones conocidas
 
-- Las alarmas corren dentro de la app: si el celular bloquea la pantalla o cierras la app, no suenan.
+- En la PWA las alarmas dependen de que el navegador mantenga la app viva; el APK es más confiable.
 - El día se cierra con un botón (en la preview "Terminar día"). Falta el cierre automático a medianoche.
 - Las fuentes (Rajdhani, Teko, Audiowide, Press Start 2P) vienen de Google Fonts; sin conexión en la primera visita se usa una fuente de respaldo.

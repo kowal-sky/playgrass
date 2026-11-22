@@ -21,12 +21,17 @@ body{margin:0;background:var(--stage);color:var(--stage-fg);font-family:'Rajdhan
   padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
 .phone{
   --bg:#020347;--card:#315bb0;--accent:#02ff00;--coin:#f7c829;--danger:#f53e42;--text:#fffdff;
-  --ui:'Rajdhani',system-ui,sans-serif;--fs:1px;
+  --on-accent:var(--bg);--ui:'Rajdhani',system-ui,sans-serif;--fs:1px;
   --card-dark:color-mix(in srgb,var(--card) 62%,#000);--line:color-mix(in srgb,var(--text) 16%,transparent);
   position:relative;width:min(390px,100%);height:min(844px,calc(100dvh - 32px));min-height:640px;overflow:hidden;
   background:var(--bg);color:var(--text);font-family:var(--ui);font-size:calc(var(--fs)*15);
   border-radius:34px;box-shadow:0 0 0 8px #0d1030,0 0 0 9px #232a6a,0 30px 80px rgba(0,0,0,.55);box-sizing:border-box}
-.phone[data-theme="cherry"]{--accent:#ff19d9;--ui:'Audiowide','Rajdhani',sans-serif;--fs:.86px}
+.phone[data-theme="cherry"]{--bg:#8E5799;--card:#A168F7;--accent:#FF80FE;--coin:#F7C568;--danger:#FC8453;--text:#F4EBFF;--on-accent:#2b1038;--ui:'Audiowide','Rajdhani',sans-serif;--fs:.86px}
+.phone[data-theme="gold"]{--bg:#D49911;--card:#F5BD3D;--accent:#ED646E;--coin:#BAC3F5;--danger:#E82C50;--text:#FFFDFF;--on-accent:#2b1700;--ui:'Press Start 2P','Courier New',monospace;--fs:.74px}
+.phone[data-theme="gold"]{--ol:#3b2600}
+.phone[data-theme="gold"] *{text-shadow:-1px -1px 0 var(--ol),1px -1px 0 var(--ol),-1px 1px 0 var(--ol),1px 1px 0 var(--ol),0 -1px 0 var(--ol),0 1px 0 var(--ol),-1px 0 0 var(--ol),1px 0 0 var(--ol)}
+.phone[data-theme="gold"] :is(.btn:not(.alt),.chip.ok,.chip.now,.chip.bad,.durs button[aria-pressed="true"],#toast,.field input,.addrow input,.avatar img){text-shadow:none}
+.phone[data-theme="gold"] .mission.past{opacity:.75}
 .phone[data-theme="pixel"]{--bg:#000;--card:#3d4f78;--accent:#76987a;--coin:#b9a765;--danger:#a65f62;--text:#e4e1e4;--ui:'Press Start 2P','Courier New',monospace;--fs:.62px}
 .phone[data-theme="pixel"] *{border-radius:0!important}
 .phone *{box-sizing:border-box}
@@ -60,8 +65,9 @@ body{margin:0;background:var(--stage);color:var(--stage-fg);font-family:'Rajdhan
 .suggest{background:var(--card);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
 .suggest b{font-size:calc(var(--fs)*17)}
 .suggest .big{font-size:calc(var(--fs)*30);font-weight:700;color:var(--accent);line-height:1}
-.btn{background:var(--accent);color:var(--bg)!important;font-weight:700;padding:13px 18px;border-radius:12px;letter-spacing:.06em;text-transform:uppercase;text-align:center}
+.btn{background:var(--accent);color:var(--on-accent)!important;font-weight:700;padding:13px 18px;border-radius:12px;letter-spacing:.06em;text-transform:uppercase;text-align:center}
 .btn.alt{background:var(--card);color:var(--text)!important}
+.card .btn.alt{background:var(--card-dark)}
 .btn.danger{background:var(--danger);color:var(--text)!important}
 .btn[disabled]{opacity:.4;cursor:not-allowed}
 
@@ -104,7 +110,7 @@ nav button[aria-current="page"]{opacity:1;color:var(--accent)}
 .mission b{font-size:calc(var(--fs)*14);display:block;line-height:1.2}
 .mission small{font-size:calc(var(--fs)*12);opacity:.8;display:block;margin-bottom:4px}
 .chip{font-size:calc(var(--fs)*11);padding:4px 8px;border-radius:20px;background:color-mix(in srgb,var(--text) 16%,transparent);letter-spacing:.08em;white-space:nowrap;text-transform:uppercase}
-.chip.ok{background:var(--accent);color:var(--bg)}
+.chip.ok{background:var(--accent);color:var(--on-accent)}
 .chip.bad{background:var(--danger);color:var(--text)}
 .chip.now{background:var(--coin);color:#1a1400}
 
@@ -170,7 +176,7 @@ nav button[aria-current="page"]{opacity:1;color:var(--accent)}
 .sheet h2{margin:0;font-size:calc(var(--fs)*22)}
 .durs{display:flex;flex-wrap:wrap;gap:8px}
 .durs button{padding:9px 14px;border-radius:10px;background:var(--card);font-weight:700}
-.durs button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+.durs button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
 .count{font-size:calc(var(--fs)*54);font-weight:700;text-align:center;line-height:1;font-variant-numeric:tabular-nums}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .muted{opacity:.8;font-size:calc(var(--fs)*13);line-height:1.35}
@@ -243,7 +249,7 @@ nav button[aria-current="page"]{opacity:1;color:var(--accent)}
     <p>Fecha simulada: <span class="sim" id="devDate"></span></p>
     <div class="grp">
       <button type="button" id="devDay">Terminar día</button>
-      <button type="button" id="devCoins">+50 monedas</button>
+      <button type="button" id="devCoins">+500 monedas</button>
       <button type="button" id="devXp">+30 XP</button>
       <button type="button" id="devReset">Reiniciar app</button>
     </div>
@@ -260,6 +266,7 @@ var DAYS_L=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'
 var MONTHS=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 
 /* Table from time_limit_table.png. weekMin = midpoint of the suggested range, w = how the week is split across Mon..Sun */
+var THEME_PRICE={cherry:70,pixel:150,gold:2000};
 var LV={
   light:{name:'Carga Ligera',range:'15 a 25 h/sem',play:'14 a 18 h',weekMin:960,w:[1,1,1,1,1,1,1],tip:'2 a 2,5 horas diarias. Ideal para inicios de semestre.'},
   moderate:{name:'Carga Moderada',range:'26 a 35 h/sem',play:'10 a 14 h',weekMin:720,w:[1,1,1,1,1,2.3,2.3],tip:'1 a 1,5 h entre semana y más el fin de semana. Juego como recompensa tras estudiar.'},
@@ -276,12 +283,12 @@ function addDays(d,n){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)
 function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 
 var REAL=new Date();REAL=new Date(REAL.getFullYear(),REAL.getMonth(),REAL.getDate());
-function fresh(){return {onboarded:false,name:'',career:'',load:30,level:'moderate',panic:false,coins:50,xp:0,streak:0,freezers:0,theme:'default',owned:['default'],photo:'',evals:[],dayOffset:0,week:null}}
+function fresh(){return {session:null,notif:false,onboarded:false,name:'',career:'',load:30,level:'moderate',panic:false,coins:50,xp:0,streak:0,freezers:0,theme:'default',owned:['default'],photo:'',evals:[],dayOffset:0,week:null}}
 var S=fresh();
 try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);if(o&&o.week!==undefined)S=Object.assign(fresh(),o)}}catch(e){}
 var DEV=/[?&]dev\b/.test(location.search);
 var ui={tab:'home',sel:null,dur:30,speed:(DEV||matchMedia('(min-width:521px)').matches)?60:1,sheet:false,alarm:null,queue:[]};
-var session=null;
+var session=S.session||null;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
 function simDate(){return addDays(REAL,S.dayOffset)}
@@ -330,21 +337,24 @@ function beep(n){try{
 function todayDay(){return S.week.days[curIdx()]}
 function startSession(){
   var d=todayDay();if(!d||!d.active||d.closed)return;
-  session={dur:ui.dur,elapsed:0,paused:false,endAlarmed:false,breaks:0};
+  session={dur:ui.dur,startedAt:Date.now(),speed:ui.speed,base:d.played,elapsed:0,endAlarmed:false,breaks:0};
+  S.session=session;save();scheduleTimesUp();
   beep(1);renderSheet();renderView();
 }
-function stopSession(){session=null;ui.alarm=null;save();renderSheet();renderView();renderTop()}
+function stopSession(){
+  if(session){var d=todayDay();d.played=session.base+(Date.now()-session.startedAt)*session.speed/60000}
+  session=null;S.session=null;ui.alarm=null;cancelTimesUp();save();syncNotifications();renderSheet();renderView();renderTop()}
 function raiseAlarm(kind,title,msg){
-  session.paused=true;ui.alarm={kind:kind};beep(4);
+  ui.alarm={kind:kind};beep(4);
   $('#overlay').innerHTML='<div class="modal alarm" role="alertdialog" aria-modal="true" aria-label="Alarma"><h2>'+esc(title)+'</h2><p>'+esc(msg)+'</p><div class="row2" style="width:100%"><button class="btn alt" type="button" data-act="alarmstop">Dejar de jugar</button><button class="btn alt" type="button" data-act="alarmmore">+15 min</button></div></div>';
   $('#overlay').hidden=false;
 }
-var last=performance.now(),lastSave=0;
+var lastSave=0;
 setInterval(function(){
-  var now=performance.now(),dt=now-last;last=now;
-  if(!S.onboarded||!session||session.paused||!S.week)return;
-  var d=todayDay(),gm=dt/60000*ui.speed;
-  session.elapsed+=gm;d.played+=gm;
+  var now=performance.now();
+  if(!S.onboarded||!session||!S.week)return;
+  var d=todayDay();
+  session.elapsed=(Date.now()-session.startedAt)*session.speed/60000;d.played=session.base+session.elapsed;
   var left=d.limit-d.played,pre=S.panic?10:5;
   if(S.panic){var b=Math.floor(session.elapsed/20);if(b>session.breaks){session.breaks=b;toast('Llevas '+b*20+' min seguidos. Haz una pausa de 5 min.')}}
   if(!S.week.penalized&&weekPlayed()>S.week.total){
@@ -381,7 +391,7 @@ function closeDay(){
     if(!w.penalized&&weekPlayed()<=w.total+.5){addXp(50);S.coins+=20;pushModal({title:'Semana completada!',msg:'Respetaste tus '+fmtH(w.total)+' de juego semanales.',xp:50,coins:20})}
     S.dayOffset++;buildWeek(mondayOf(simDate()),0);
   }else S.dayOffset++;
-  save();renderAll();
+  save();renderAll();syncNotifications();
 }
 
 /* ---------- rendering ---------- */
@@ -450,9 +460,10 @@ function renderCal(){
    '<div class="addrow"><input id="evText" maxlength="40" placeholder="Ej: Certamen de Cálculo" aria-label="Nueva evaluación"><button class="btn" type="button" data-act="addev">Anotar</button></div></div></div>';
 }
 function renderShop(){
-  var themes=[{id:'default',n:'Original',d:'Azul oscuro con verde neón.',p:0,sw:'background:#020347;color:#02ff00;border:3px solid #315bb0',t:'Aa'},
-    {id:'cherry',n:'Cherry',d:'Rosado neón #ff19d9 y fuente Audiowide.',p:70,sw:'background:#020347;color:#ff19d9;border:3px solid #315bb0;font-family:Audiowide,sans-serif',t:'Aa'},
-    {id:'pixel',n:'Pixel',d:'Fuente retro, fondo negro y colores desaturados.',p:150,sw:'background:#000;color:#76987a;border:3px solid #3d4f78;font-family:\'Press Start 2P\',monospace;font-size:14px',t:'Aa'}];
+  var themes=[{id:'default',n:'Original',d:'Un clásico',p:0,sw:'background:#020347;color:#02ff00;border:3px solid #315bb0',t:'Aa'},
+    {id:'cherry',n:'Cherry',d:'Algo más suave',p:THEME_PRICE.cherry,sw:'background:#8E5799;color:#FF80FE;border:3px solid #A168F7;font-family:Audiowide,sans-serif',t:'Aa'},
+    {id:'pixel',n:'Pixel',d:'Fuente retro, fondo oscuro y colores desaturados.',p:THEME_PRICE.pixel,sw:'background:#000;color:#76987a;border:3px solid #3d4f78;font-family:\'Press Start 2P\',monospace;font-size:14px',t:'Aa'},
+    {id:'gold',n:'Gold',d:'No lo vale...',p:THEME_PRICE.gold,sw:'background:#D49911;color:#ED646E;border:3px solid #F5BD3D;font-family:\'Press Start 2P\',monospace;font-size:14px',t:'Aa'}];
   var h=themes.map(function(t){var own=S.owned.indexOf(t.id)>-1,on=S.theme===t.id;
     var btn=on?'<span class="chip ok">En uso</span>':own?'<button class="btn alt" type="button" data-equip="'+t.id+'">Usar</button>':'<button class="btn" type="button" data-buy="'+t.id+'"'+(S.coins<t.p?' disabled':'')+'><span class="price"><span class="coin"></span>'+t.p+'</span></button>';
     return '<div class="card item"><div class="swatch" style="'+t.sw+'">'+t.t+'</div><div><b>'+t.n+'</b><small>'+t.d+'</small></div>'+btn+'</div>'}).join('');
@@ -463,9 +474,9 @@ function renderProfile(){
   var lv=LV[S.level],init=(S.name||'?').trim().charAt(0).toUpperCase();
   $('#view').innerHTML='<div class="prof"><div class="avatar">'+(S.photo?'<img alt="Foto de perfil" src="'+S.photo+'">':init)+'</div>'+
    '<label class="btn alt" style="padding:8px 14px;cursor:pointer;font-size:.85em">Subir foto<input id="photoIn" type="file" accept="image/*" style="position:absolute;opacity:0;width:1px;height:1px"></label>'+
-   '<h2>'+esc(S.name)+'</h2><div class="career">'+esc(S.career)+'</div>'+
+   '<h2>'+esc(S.name)+'</h2><div class="career">'+esc(S.career)+'</div>'+'<button class="btn alt" type="button" data-act="edit" style="padding:8px 14px;font-size:.85em">Editar datos</button>'+
    '<div class="stats"><div class="card"><b>Nivel '+level()+'</b><small>'+S.xp+' XP</small></div><div class="card"><b>'+S.load+' h/sem</b><small>'+lv.name+'</small></div>'+
-   '<div class="card"><b>'+S.streak+'</b><small>Racha en días</small></div><div class="card"><b>'+fmtH(LV[S.level].weekMin)+'</b><small>Juego sugerido</small></div></div></div>';
+   '<div class="card"><b>'+S.streak+'</b><small>Racha en días</small></div><div class="card"><b>'+fmtH(LV[S.level].weekMin)+'</b><small>Juego sugerido</small></div></div>'+notifCard()+'</div>';
   var fi=$('#photoIn');if(fi)fi.addEventListener('change',onPhoto);
 }
 function onPhoto(e){
@@ -520,7 +531,7 @@ function finishOnboard(){
   $('#errLoad').textContent=(h>0&&h<=100)?'':(ok=false,'Ingresa un número entre 1 y 100.');
   if(!ok)return;
   S.name=n;S.career=c;S.load=h;S.level=levelFor(h);S.onboarded=true;S.panic=false;S.dayOffset=0;
-  var sd=simDate();buildWeek(mondayOf(sd),idxOf(sd));save();ui.tab='home';renderAll();
+  var sd=simDate();buildWeek(mondayOf(sd),idxOf(sd));save();ui.tab='home';renderAll();setNotif(true);
 }
 
 /* ---------- events ---------- */
@@ -528,7 +539,7 @@ document.addEventListener('click',function(e){
   var t=e.target.closest('[data-tab],[data-act],[data-date],[data-del],[data-buy],[data-equip],[data-dur],[data-speed],#devDay,#devCoins,#devXp,#devReset,#obGo');if(!t)return;
   if(t.id==='obGo'){finishOnboard();return}
   if(t.id==='devDay'){if(S.onboarded)closeDay();return}
-  if(t.id==='devCoins'){S.coins+=50;save();renderTop();renderView();return}
+  if(t.id==='devCoins'){S.coins+=500;save();renderTop();renderView();return}
   if(t.id==='devXp'){addXp(30);save();renderTop();return}
   if(t.id==='devReset'){try{localStorage.removeItem(KEY)}catch(x){}S=fresh();session=null;ui={tab:'home',sel:null,dur:30,speed:ui.speed,sheet:false,alarm:null,queue:[]};$('#overlay').hidden=true;$('#sheet').hidden=true;$('#obName').value='';$('#obCareer').value='';$('#obLoad').value=30;renderAll();return}
   if(t.dataset.speed){ui.speed=+t.dataset.speed;document.querySelectorAll('#devSpeed button').forEach(function(b){b.setAttribute('aria-pressed',b===t)});return}
@@ -540,34 +551,161 @@ document.addEventListener('click',function(e){
   if(t.dataset.buy){
     var b=t.dataset.buy;
     if(b==='freezer'){if(S.coins>=50){S.coins-=50;S.freezers++;toast('Congelador de racha comprado.')}}
-    else{var p=b==='cherry'?70:150;if(S.coins>=p&&S.owned.indexOf(b)<0){S.coins-=p;S.owned.push(b);S.theme=b;toast('Tema desbloqueado y activado.')}}
+    else{var p=THEME_PRICE[b];if(S.coins>=p&&S.owned.indexOf(b)<0){S.coins-=p;S.owned.push(b);S.theme=b;toast('Tema desbloqueado y activado.')}}
     save();renderTop();renderView();return}
   switch(t.dataset.act){
+    case 'edit':openEdit();break;
+    case 'editcancel':$('#overlay').hidden=true;break;
+    case 'editsave':saveEdit();break;
+    case 'notif':setNotif(!S.notif);break;
+    case 'testnotif':testNotif();break;
     case 'panic':S.panic=!S.panic;recalc();save();toast(S.panic?'Semana de entregas activada.':'Semana de entregas desactivada.');renderView();break;
     case 'sheet':ui.sheet=true;renderSheet();break;
     case 'sheetclose':ui.sheet=false;renderSheet();break;
     case 'start':startSession();break;
     case 'stop':stopSession();ui.sheet=false;renderSheet();break;
     case 'alarmstop':stopSession();ui.sheet=false;renderSheet();$('#overlay').hidden=true;nextModal();break;
-    case 'alarmmore':if(session){session.paused=false;if(ui.alarm&&ui.alarm.kind==='end'){session.dur+=15;session.endAlarmed=false}ui.alarm=null;$('#overlay').hidden=true;nextModal()}break;
+    case 'alarmmore':if(session){addFifteen();nextModal()}break;
     case 'modalok':nextModal();renderTop();break;
     case 'addev':var v=$('#evText').value.trim();if(!v){$('#evText').focus();break}S.evals.push({id:Date.now(),date:ui.sel,text:v});save();renderCal();break;
   }
 });
 $('#obLoad').addEventListener('input',updateSuggest);
 
+/* ---------- notifications ---------- */
+var CAP=window.Capacitor,NATIVE=!!(CAP&&CAP.isNativePlatform&&CAP.isNativePlatform());
+var LN=NATIVE?CAP.registerPlugin('LocalNotifications'):null;
+var ID_TIMESUP=1001,ID_TEST=1999,ID_MORNING=2100,ID_WEEKEND=3100,webTimer=null;
+var MORNING=[
+ '{n}, hoy es un buen día para avanzar. Estudia primero y deja el juego como premio.',
+ 'Buenos días, {n}. Un bloque de estudio ahora vale más que tres después.',
+ 'Arriba, {n}. Tus misiones de hoy te esperan: cumple y gana XP.',
+ 'Un paso a la vez, {n}. Termina tus pendientes y luego juegas sin culpa.',
+ 'Buenos días, {n}. Tu racha cuenta contigo. Hoy también se puede.',
+ '{n}, empieza por lo más difícil del día. El resto se hace más liviano.',
+ 'Nuevo día, nueva partida, {n}. Primero el estudio, después el modo juego.'];
+function noop(){}
+function openEdit(){
+  $('#overlay').innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-label="Editar datos" style="align-items:stretch;text-align:left"><h2 style="text-align:center">Editar datos</h2>'+
+  '<div class="field"><label for="edName">Nombre</label><input id="edName" autocomplete="off" value="'+esc(S.name)+'"></div>'+
+  '<div class="field"><label for="edCareer">Carrera</label><input id="edCareer" autocomplete="off" value="'+esc(S.career)+'"></div>'+
+  '<div class="field"><label for="edLoad">Horas de carga académica por semana</label><input id="edLoad" type="number" min="1" max="100" inputmode="numeric" value="'+S.load+'"></div>'+
+  '<p class="muted" style="margin:0;text-align:left">Cambiar la carga académica recalcula tus horas de juego de la semana.</p>'+
+  '<div class="row2"><button class="btn alt" type="button" data-act="editcancel">Cancelar</button><button class="btn" type="button" data-act="editsave">Guardar</button></div></div>';
+  $('#overlay').hidden=false;
+}
+function saveEdit(){
+  var n=$('#edName').value.trim(),c=$('#edCareer').value.trim(),h=parseFloat($('#edLoad').value);
+  if(!n||!c||!(h>0&&h<=100)){toast('Revisa los datos: nombre, carrera y horas entre 1 y 100.');return}
+  S.name=n;S.career=c;S.load=h;S.level=levelFor(h);recalc();save();
+  $('#overlay').hidden=true;renderView();syncNotifications();
+  toast('Datos actualizados. Juego sugerido: '+fmtH(LV[S.level].weekMin)+' a la semana.');
+}
+function notifCard(){
+  var kind=NATIVE?'Motivación en la mañana, aviso al terminar tu sesión y resumen del fin de semana.':'Aviso al terminar tu sesión. Las alertas programadas con la app cerrada solo funcionan en la versión APK.';
+  return '<div class="card" style="width:100%;display:flex;flex-direction:column;gap:10px"><div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div><b>Notificaciones</b><div class="muted">'+kind+'</div></div><button class="switch" type="button" role="switch" aria-checked="'+S.notif+'" aria-label="Notificaciones" data-act="notif"></button></div>'+'<button class="btn alt" type="button" data-act="testnotif">Probar alarma en 10 s</button>'+'</div>';
+}
+function initNotif(){
+  if(NATIVE){
+    LN.createChannel({id:'timesup',name:'Se acabó el tiempo',description:'Alarma al terminar tu sesión de juego',importance:5,visibility:1,vibration:true,lights:true}).catch(noop);
+    LN.createChannel({id:'recordatorios',name:'Recordatorios',description:'Motivación diaria y resumen del fin de semana',importance:3,vibration:true}).catch(noop);
+    LN.registerActionTypes({types:[{id:'TIMES_UP',actions:[{id:'add15',title:'+15 min'},{id:'stop',title:'Apagar'}]}]}).catch(noop);
+    LN.addListener('localNotificationActionPerformed',function(ev){onNotifAction({actionId:ev.actionId})});
+    document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')syncNotifications()});
+    syncNotifications();
+  }
+}
+function setNotif(on){
+  if(!on){S.notif=false;save();cancelAllNotif();if(S.onboarded)renderView();return}
+  var ask;
+  if(NATIVE){
+    ask=LN.requestPermissions().then(function(r){
+      if(r.display!=='granted')return false;
+      return LN.checkExactNotificationSetting().then(function(x){if(x&&x.exact_alarm!=='granted')return LN.changeExactNotificationSetting().catch(noop)}).catch(noop).then(function(){return true})});
+  }else if('Notification' in window){
+    ask=Notification.requestPermission().then(function(p){return p==='granted'});
+  }else ask=Promise.resolve(false);
+  ask.then(function(ok){
+    if(!ok){S.notif=false;save();toast('Sin permiso de notificaciones. Actívalo en los ajustes del celular.');if(S.onboarded)renderView();return}
+    S.notif=true;save();syncNotifications();if(S.onboarded)renderView();toast('Notificaciones activadas.')
+  }).catch(function(){S.notif=false;save()});
+}
+function showWeb(t,b,o){
+  if(NATIVE||!('Notification' in window)||Notification.permission!=='granted')return;
+  o=Object.assign({body:b,icon:'icon-192.png',badge:'icon-192.png'},o||{});
+  var sw=navigator.serviceWorker;
+  (sw?sw.getRegistration():Promise.resolve(null)).then(function(r){if(r)r.showNotification(t,o);else new Notification(t,o)}).catch(noop);
+}
+var TU_BODY=function(){return 'Es hora de volver a estudiar, '+S.name+'. Tus misiones te esperan.'};
+function scheduleTimesUp(){
+  if(!session||!S.notif)return;
+  var d=todayDay(),toEnd=session.dur-session.elapsed,toLim=d.limit-d.played;
+  var mins=toLim>.05?Math.min(toEnd,toLim):toEnd;if(!(mins>.05))mins=.05;
+  var ms=mins*60000/session.speed;
+  if(NATIVE){
+    LN.schedule({notifications:[{id:ID_TIMESUP,title:'¡Se acabó el tiempo!',body:TU_BODY(),channelId:'timesup',actionTypeId:'TIMES_UP',schedule:{at:new Date(Date.now()+ms),allowWhileIdle:true}}]}).catch(noop);
+  }else{
+    clearTimeout(webTimer);
+    webTimer=setTimeout(function(){showWeb('¡Se acabó el tiempo!',TU_BODY(),{tag:'timesup',requireInteraction:true,vibrate:[300,150,300,150,600],actions:[{action:'add15',title:'+15 min'},{action:'stop',title:'Apagar'}]})},ms);
+  }
+}
+function cancelTimesUp(){clearTimeout(webTimer);if(NATIVE)LN.cancel({notifications:[{id:ID_TIMESUP}]}).catch(noop)}
+function cancelAllNotif(){
+  clearTimeout(webTimer);if(!NATIVE)return;
+  var ids=[{id:ID_TIMESUP}],i;for(i=0;i<30;i++)ids.push({id:ID_MORNING+i});ids.push({id:ID_WEEKEND},{id:ID_WEEKEND+1});
+  LN.cancel({notifications:ids}).catch(noop);
+}
+function weekendMsg(final){
+  var wp=weekPlayed(),tot=S.week.total,ok=wp<=tot+.5;
+  var base='Esta semana llevas '+fmt(wp)+' de '+fmt(tot)+' de juego ('+Math.round(tot?wp/tot*100:0)+'% de tu meta).';
+  var tail=ok?(final?'Cumpliste tu meta semanal. ¡Felicitaciones, '+S.name+'!':'Vas dentro de tu meta. ¡Felicitaciones, sigue así!'):'Te pasaste de tu meta, pero una semana no define nada. ¡Ánimo, la próxima te sale!';
+  return base+' '+tail;
+}
+function syncNotifications(){
+  if(!NATIVE||!S.notif||!S.onboarded||!S.week)return;
+  var now=new Date(),list=[],ids=[],i;
+  for(i=0;i<30;i++)ids.push({id:ID_MORNING+i});ids.push({id:ID_WEEKEND},{id:ID_WEEKEND+1});
+  var doy=Math.floor((now-new Date(now.getFullYear(),0,0))/864e5);
+  for(i=0;i<14;i++){
+    var t=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i,8,30);if(t<=now)continue;
+    list.push({id:ID_MORNING+i,title:'Buenos días',body:MORNING[(doy+i)%MORNING.length].replace('{n}',S.name),channelId:'recordatorios',schedule:{at:t,allowWhileIdle:true}});
+  }
+  var mon=parse(S.week.start),sat=addDays(mon,5),sun=addDays(mon,6);
+  var ts=new Date(sat.getFullYear(),sat.getMonth(),sat.getDate(),11,0),tu=new Date(sun.getFullYear(),sun.getMonth(),sun.getDate(),18,0);
+  if(ts>now)list.push({id:ID_WEEKEND,title:'Resumen de tu semana',body:weekendMsg(false),channelId:'recordatorios',schedule:{at:ts,allowWhileIdle:true}});
+  if(tu>now)list.push({id:ID_WEEKEND+1,title:'Cierre de tu semana',body:weekendMsg(true),channelId:'recordatorios',schedule:{at:tu,allowWhileIdle:true}});
+  LN.cancel({notifications:ids}).catch(noop).then(function(){return LN.schedule({notifications:list})}).catch(noop);
+}
+function testNotif(){
+  if(!S.notif){toast('Activa las notificaciones primero.');return}
+  if(NATIVE)LN.schedule({notifications:[{id:ID_TEST,title:'¡Se acabó el tiempo!',body:TU_BODY(),channelId:'timesup',actionTypeId:'TIMES_UP',schedule:{at:new Date(Date.now()+10000),allowWhileIdle:true}}]}).catch(noop);
+  else setTimeout(function(){showWeb('¡Se acabó el tiempo!',TU_BODY(),{tag:'timesup',vibrate:[300,150,300,150,600],actions:[{action:'add15',title:'+15 min'},{action:'stop',title:'Apagar'}]})},10000);
+  toast('Llega en 10 segundos. Puedes bloquear la pantalla.');
+}
+function addFifteen(){
+  if(!session)return;
+  session.elapsed=(Date.now()-session.startedAt)*session.speed/60000;
+  session.dur=Math.max(session.dur,session.elapsed)+15;session.endAlarmed=false;
+  ui.alarm=null;$('#overlay').hidden=true;scheduleTimesUp();save();renderSheet();
+}
+function onNotifAction(ev){
+  var a=ev&&ev.actionId;
+  if(a==='add15'){if(session){addFifteen();toast('+15 min agregados a tu sesión.')}}
+  else if(a==='stop'){if(session){stopSession();ui.sheet=false;renderSheet();$('#overlay').hidden=true;toast('Sesión terminada.')}}
+}
+
 /* ---------- boot ---------- */
 function applyThemeEarly(){$('#phone').setAttribute('data-theme',S.theme)}
 applyThemeEarly();
 if(DEV)document.body.classList.add('dev-on');
 document.querySelectorAll('#devSpeed button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.speed===ui.speed)});
-try{if(/^https?:$/.test(location.protocol)&&'serviceWorker' in navigator)navigator.serviceWorker.register('sw.js')}catch(e){}
+try{if(/^https?:$/.test(location.protocol)&&'serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});navigator.serviceWorker.addEventListener('message',function(e){if(e.data&&e.data.type==='notif-action')onNotifAction({actionId:e.data.action})})}catch(e){}
 setTimeout(function(){
   if(S.onboarded){
     var sd=simDate(),ws=S.week&&S.week.start;
     if(!S.week||ws!==iso(mondayOf(sd)))buildWeek(mondayOf(sd),idxOf(sd));
   }
-  renderAll();
+  renderAll();initNotif();
 },1800);
 })();
 </script>

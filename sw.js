@@ -1,5 +1,5 @@
 // Service worker mínimo: guarda la app y las fuentes para usarla sin conexión.
-const CACHE = 'playgrass-v1';
+const CACHE = 'playgrass-v2';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
@@ -16,4 +16,17 @@ self.addEventListener('fetch', e => {
       return r;
     }).catch(() => caches.match(e.request).then(m => m || caches.match('index.html')))
   );
+});
+
+// Botones de la notificación "Se acabó el tiempo": avisan a la app abierta.
+self.addEventListener('notificationclick', e => {
+  const action = e.action;
+  e.notification.close();
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    if (list.length) {
+      list.forEach(c => c.postMessage({ type: 'notif-action', action }));
+      return list[0].focus();
+    }
+    return self.clients.openWindow('./');
+  }));
 });
